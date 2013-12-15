@@ -3,7 +3,7 @@
 %}
 
 /*%error-verbose*/
-%token token_pr_pr_algoritmo
+%token token_pr_algoritmo
 %token token_pr_variaveis
 %token token_pr_fim_variaveis
 %token token_pr_inicio
@@ -15,8 +15,10 @@
 %token token_pr_real
 %token token_pr_reais
 %token token_pr_literal
+%token token_pr_literais
 %token token_pr_logico
 %token token_pr_logicos
+%token token_pr_matriz
 %token token_pr_se
 %token token_pr_entao
 %token token_pr_senao
@@ -61,6 +63,8 @@
 %token token_fecha_parenteses
 %token token_abre_chaves
 %token token_fecha_chaves
+%token token_abre_colchetes
+%token token_fecha_colchetes
 %token token_tralha
 %token token_contra_barra
 %token token_ponto
@@ -69,11 +73,78 @@
 %token token_ponto_virgula
 %token token_atribuicao
 %token token_identificador 
+%token token_desconhecido
 
 %start algoritmo
 
 %%
-algoritmo : ;
+
+
+algoritmo
+: declaracao_algoritmo bloco_variaveis bloco_inicio
+;
+
+declaracao_algoritmo
+: token_pr_algoritmo token_identificador token_ponto_virgula
+;
+
+/*bloco de variaveis pode nao existir ou pode ser vazio*/
+bloco_variaveis
+: token_pr_variaveis declaracao_variaveis token_pr_fim_variaveis
+| token_pr_variaveis token_pr_fim_variaveis
+|
+;
+
+declaracao_variaveis
+: lista_variaveis token_dois_pontos tipo_variavel token_ponto_virgula
+| declaracao_variaveis lista_variaveis token_dois_pontos tipo_variavel token_ponto_virgula
+;
+
+tipo_variavel
+: tipo_primitivo
+| tipo_matriz
+;
+
+lista_variaveis
+: lista_variaveis token_virgula token_identificador
+| token_identificador
+;
+
+tipo_primitivo
+: token_pr_inteiro
+| token_pr_real
+| token_pr_caractere
+| token_pr_literal
+| token_pr_logico
+;
+
+tipo_matriz
+: token_pr_matriz matriz_colchetes token_pr_de tipo_primitivo_plural
+;
+
+matriz_colchetes
+: matriz_colchetes token_abre_colchetes token_inteiro token_fecha_colchetes
+| token_abre_colchetes token_inteiro token_fecha_colchetes
+;
+
+tipo_primitivo_plural
+: token_pr_inteiros
+| token_pr_reais
+| token_pr_caracteres
+| token_pr_literais
+| token_pr_logicos
+;
+
+/*bloco inicio pode nao existir ou pode ser vazio*/
+bloco_inicio
+: token_pr_inicio lista_comandos token_pr_fim
+| token_pr_inicio token_pr_fim
+|
+;
+
+lista_comandos
+:
+;
 
 %%
 
@@ -85,6 +156,5 @@ main(){
 
 /* rotina de erro */
 yyerror (){
-	printf("Erro! Linha %d\n", nun_linha);
+	printf("Erro! Linha %d\n", num_linha);
 }
-

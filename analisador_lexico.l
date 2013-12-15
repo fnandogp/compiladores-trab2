@@ -3,11 +3,7 @@ int num_linha = 1;
 %}
 
 %%
-
-\/\*[^(\*\/)]*\*\/	;
-\/\/[^\n]*\n 		;
-
-algoritmo 		{return token_pr_pr_algoritmo;}
+algoritmo 		{return token_pr_algoritmo;}
 variáveis 		{return token_pr_variaveis;}
 fim-variáveis 	{return token_pr_fim_variaveis;}
 início			{return token_pr_inicio;}
@@ -19,6 +15,7 @@ caracteres 		{return token_pr_caracteres;}
 real 			{return token_pr_real;}
 reais 			{return token_pr_reais;}
 literal 		{return token_pr_literal;}
+literais 		{return token_pr_literais;}
 lógico 			{return token_pr_logico;}
 lógicos 		{return token_pr_logicos;}
 matriz 			{return token_pr_matriz;}
@@ -40,8 +37,8 @@ função 			{return token_pr_funcao;}
 retorne 		{return token_pr_retorne;}
 verdadeiro		{return token_pr_verdadeiro;}
 falso			{return token_pr_falso;}
-"e"				{return token_pr_e;}
-"ou"			{return token_pr_ou;}
+e				{return token_pr_e;}
+ou				{return token_pr_ou;}
 
 ("+"|"-")?[0-9]+ |
 0(x|X)[0-9a-fA-F]+ |
@@ -70,18 +67,21 @@ falso			{return token_pr_falso;}
 ")"							{return token_fecha_parenteses;}
 "{"							{return token_abre_chaves;}
 "}"							{return token_fecha_chaves;}
+"["							{return token_abre_colchetes;}
+"]"							{return token_fecha_colchetes;}
 "#"							{return token_tralha;}
 "\\"						{return token_contra_barra;}
 "."							{return token_ponto;}
 ","							{return token_virgula;}
-";"							{return token_dois_pontos;}
-":"							{return token_ponto_virgula;}
+";"							{return token_ponto_virgula;}
+":"							{return token_dois_pontos;}
 ":="						{return token_atribuicao;}
 [a-zA-Z_][a-zA-Z0-9_]*		{return token_identificador;} 
 
+\/\/[^\n]*\n {num_linha++;}
 [ \t]	;
-\n	{nun_linha++;}
+\n	{num_linha++;}
 
-.	{return token_desconhecido;}
+.							{return token_desconhecido;}
 
 %%

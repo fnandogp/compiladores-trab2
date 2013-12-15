@@ -6,7 +6,7 @@ analisador:
 	gcc -o trab2 analisador_sintatico.tab.c -lfl
 	
 relatorio:
-	pdflatex trab2.tex
+	#pdflatex trab2.tex
 
 clean:
 	rm -rf trab2 lex.yy.c analisador_sintatico.tab.c *~
