@@ -3,6 +3,9 @@ int num_linha = 1;
 %}
 
 %%
+
+
+
 algoritmo 		{return token_pr_algoritmo;}
 variáveis 		{return token_pr_variaveis;}
 fim-variáveis 	{return token_pr_fim_variaveis;}
@@ -27,7 +30,7 @@ para 			{return token_pr_para;}
 de 				{return token_pr_de;}
 até 			{return token_pr_ate;}
 faça 			{return token_pr_faca;}
-fim-para 		{return token_pr_fim_faca;}
+fim-para 		{return token_pr_fim_para;}
 passo 			{return token_pr_passo;}
 enquanto 		{return token_pr_enquanto;}
 fim-enquanto 	{return token_pr_fim_enquanto;}
@@ -52,15 +55,19 @@ ou				{return token_pr_ou;}
 "\/"						{return token_divisao;}
 "\*"						{return token_multiplicacao;}
 "++"						{return token_incrementador;}
-"%"							{return token_divisao_inteira;}
+"%"							{return token_modulo;}
 ">"							{return token_maior;}
 ">="						{return token_maior_igual;}
 "<"							{return token_menor;}
 "="							{return token_igual;}
 "<>"						{return token_diferente;}
 "&&"						{return token_e;}
+"&"							{return token_e_bit;}
 "||"						{return token_ou;}
+"|"							{return token_ou_bit;}
+"^"							{return token_xor_bit;}
 "!"							{return token_nao;}
+"~"							{return token_til;}
 "\""						{return token_aspas_dupla;}
 "'"							{return token_aspas_simples;}
 "("							{return token_abre_parenteses;}
@@ -79,6 +86,8 @@ ou				{return token_pr_ou;}
 [a-zA-Z_][a-zA-Z0-9_]*		{return token_identificador;} 
 
 \/\/[^\n]*\n {num_linha++;}
+\/\*[^(\*\/)]*\*\/	;
+
 [ \t]	;
 \n	{num_linha++;}
 
