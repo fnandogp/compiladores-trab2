@@ -155,9 +155,8 @@ lista_comandos
 
 comando
 : atribuicao
-| chamada_funcao
-/*
-*/
+| chamada_funcao token_ponto_virgula
+| chamada_funcao_interna
 | comando_retorne
 | comando_se
 | comando_enquanto
@@ -201,37 +200,68 @@ passo
 */
 
 expressao
-: expressao token_pr_ou expressao
-| expressao token_ou expressao
-| expressao token_ou_bit expressao
-| expressao token_pr_e expressao
-| expressao token_e expressao
-| expressao token_e_bit expressao
-| expressao token_xor_bit expressao
-| expressao token_igual expressao
-| expressao token_diferente expressao
-| expressao token_maior expressao
-| expressao token_maior_igual expressao
-| expressao token_menor expressao
-| expressao token_menor_igual expressao
-| expressao token_soma expressao
-| expressao token_subtracao expressao
-| expressao token_divisao expressao
-| expressao token_multiplicacao expressao
-| expressao token_modulo expressao
-| token_soma termo
-| token_subtracao termo
-| token_til termo
-| token_pr_nao termo
-| termo
+: expressao token_pr_ou termo_1
+| expressao token_ou termo_1
+| termo_1
 ;
 
-termo
-: chamada_funcao
-| chamada_funcao_interna
-| valor_esquerda
-| valor_primitivo
+termo_1
+: termo_1 token_pr_e termo_2
+| termo_1 token_e termo_2
+| termo_2
+;
+
+termo_2
+: termo_2 token_ou_bit termo_3
+| termo_3
+;
+
+termo_3
+: termo_3 token_xor_bit termo_4
+| termo_4
+;
+
+termo_4
+: termo_4 token_e_bit termo_5
+| termo_5
+;
+
+termo_5
+: termo_5 token_igual termo_6
+| termo_5 token_diferente termo_6
+| termo_6
+;
+
+termo_6
+: termo_6 token_menor termo_7
+| termo_6 token_menor_igual termo_7
+| termo_6 token_maior termo_7
+| termo_6 token_maior_igual termo_7
+| termo_7
+;
+
+termo_7
+: termo_7 token_soma termo_8
+| termo_7 token_subtracao termo_8
+| termo_8
+;
+
+termo_8
+: termo_8 token_multiplicacao termo_9
+| termo_8 token_divisao termo_9
+| termo_8 token_modulo termo_9
+| termo_9
+;
+
+termo_9
+: token_soma termo_9
+| token_subtracao termo_9
+| token_nao termo_9
 | token_abre_parenteses expressao token_fecha_parenteses
+| token_identificador
+| valor_primitivo
+| chamada_funcao
+| chamada_funcao_interna
 ;
 
 valor_primitivo
@@ -244,23 +274,13 @@ valor_primitivo
 ;
 
 chamada_funcao
-: token_identificador token_abre_parenteses paramentros_chamada_funcao token_fecha_parenteses token_ponto_virgula
-| token_identificador token_abre_parenteses token_fecha_parenteses token_ponto_virgula
+: token_identificador token_abre_parenteses paramentros_chamada_funcao token_fecha_parenteses 
+| token_identificador token_abre_parenteses token_fecha_parenteses 
 ;
 
 chamada_funcao_interna
-: token_pr_imprima token_abre_parenteses parametros_imprima token_fecha_parenteses token_ponto_virgula
-| token_pr_leia token_abre_parenteses token_fecha_parenteses token_ponto_virgula
-;
-
-parametros_imprima
-: parametros_imprima token_virgula parametro_imprima
-| parametro_imprima
-;
-
-parametro_imprima
-: valor_primitivo
-| token_identificador
+: token_pr_imprima token_abre_parenteses paramentros_chamada_funcao token_fecha_parenteses token_ponto_virgula
+| token_pr_leia token_abre_parenteses token_fecha_parenteses 
 ;
 
 paramentros_chamada_funcao

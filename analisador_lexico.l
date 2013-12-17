@@ -59,6 +59,7 @@ ou				{return token_pr_ou;}
 ">"							{return token_maior;}
 ">="						{return token_maior_igual;}
 "<"							{return token_menor;}
+"<="						{return token_menor_igual;}
 "="							{return token_igual;}
 "<>"						{return token_diferente;}
 "&&"						{return token_e;}
