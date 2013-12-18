@@ -81,6 +81,11 @@
 %token token_identificador 
 %token token_desconhecido
 
+%token token_pr_escolha
+%token token_pr_caso 
+%token token_pr_fim_escolha
+%token token_pr_default
+
 %start algoritmo
 
 %%
@@ -161,6 +166,7 @@ comando
 | comando_se
 | comando_enquanto
 | comando_para
+| comando_escolha
 ;
 
 valor_esquerda
@@ -176,6 +182,23 @@ comando_retorne
 : token_pr_retorne token_ponto_virgula
 | token_pr_retorne expressao token_ponto_virgula
 ;
+
+//nao pode ter escolha sem o caso
+comando_escolha
+: token_pr_escolha token_abre_parenteses paramentros_chamada_funcao token_fecha_parenteses casos token_pr_fim_escolha
+;
+
+casos
+: casos caso
+| caso
+;
+
+caso
+: token_pr_caso valor_primitivo token_dois_pontos lista_comandos token_pr_para token_ponto_virgula
+| token_pr_caso valor_primitivo token_dois_pontos token_pr_para token_ponto_virgula
+| token_pr_default token_dois_pontos lista_comandos token_pr_para token_ponto_virgula
+;
+
 
 comando_se
 : token_pr_se expressao token_pr_entao lista_comandos token_pr_fim_se

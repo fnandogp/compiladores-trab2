@@ -15,23 +15,24 @@ início
 	b := leia();
 	imprima("Digite a operação (soma/sub/mult/div):");
 	op := leia();
-	se op = "soma" então
-		imprima("soma de ", a, " e ", b, " é igual a ", soma(a, b));
-	senão
-		se op = "sub" então
+	escolha (op)
+		caso "soma" :
+			imprima("soma de ", a, " e ", b, " é igual a ", soma(a, b));
+			para;
+		caso "sub" :
 			imprima("subtração de ", a, " e ", b, " é igual a ", sub(a, b));
-		senão
-			se op = "mult" então
-				imprima("multiplicação de ", a, " e ", b, " é igual a ", mult(a, b));
-			senão
-				se op = "div" então
-					imprima("divisão de ", a, " e ", b, " é igual a ", div(a, b));
-				senão
-					imprima("Operação inválida");
-				fim-se
-			fim-se
-		fim-se
-	fim-se
+			para;
+		caso "mult" :
+			imprima("multiplicação de ", a, " e ", b, " é igual a ", mult(a, b));
+			para;
+		caso "div" :
+			imprima("divisão de ", a, " e ", b, " é igual a ", div(a, b));
+			para;
+		default:
+			imprima("Operação inválida");
+			para;
+	fim-escolha
+
 fim
 
 

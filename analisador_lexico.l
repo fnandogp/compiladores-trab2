@@ -8,7 +8,7 @@ int num_linha = 1;
 
 algoritmo 		{return token_pr_algoritmo;}
 variáveis 		{return token_pr_variaveis;}
-fim-variáveis 	{return token_pr_fim_variaveis;}
+fim-variáveis 		{return token_pr_fim_variaveis;}
 início			{return token_pr_inicio;}
 fim 			{return token_pr_fim;}
 inteiro 		{return token_pr_inteiro;}
@@ -22,26 +22,32 @@ literais 		{return token_pr_literais;}
 lógico 			{return token_pr_logico;}
 lógicos 		{return token_pr_logicos;}
 matriz 			{return token_pr_matriz;}
-se 				{return token_pr_se;}
+se 			{return token_pr_se;}
 então 			{return token_pr_entao;}
 senão 			{return token_pr_senao;}
 fim-se 			{return token_pr_fim_se;}
 para 			{return token_pr_para;}
-de 				{return token_pr_de;}
+de 			{return token_pr_de;}
 até 			{return token_pr_ate;}
 faça 			{return token_pr_faca;}
 fim-para 		{return token_pr_fim_para;}
 passo 			{return token_pr_passo;}
 enquanto 		{return token_pr_enquanto;}
-fim-enquanto 	{return token_pr_fim_enquanto;}
+fim-enquanto 		{return token_pr_fim_enquanto;}
 imprima 		{return token_pr_imprima;}
 leia 			{return token_pr_leia;}
 função 			{return token_pr_funcao;}
 retorne 		{return token_pr_retorne;}
 verdadeiro		{return token_pr_verdadeiro;}
 falso			{return token_pr_falso;}
-e				{return token_pr_e;}
-ou				{return token_pr_ou;}
+e			{return token_pr_e;}
+ou			{return token_pr_ou;}
+	
+escolha			{return token_pr_escolha;}
+caso			{return token_pr_caso;}	
+fim-escolha		{return token_pr_fim_escolha;}
+default			{return token_pr_default;}
+
 
 ("+"|"-")?[0-9]+ |
 0(x|X)[0-9a-fA-F]+ |
