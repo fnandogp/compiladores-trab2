@@ -1,5 +1,9 @@
 %{
+#include <stdio.h>
+#include <string.h>
+int i = 0;
 int num_linha = 1;
+char comentario[2000];
 %}
 
 %%
@@ -93,7 +97,13 @@ default			{return token_pr_default;}
 [a-zA-Z_][a-zA-Z0-9_]*		{return token_identificador;} 
 
 \/\/[^\n]*\n {num_linha++;}
-\/\*[^(\*\/)]*\*\/	;
+\/\*[^(\*\/)]*\*\/ {
+	strcpy(comentario,yytext);
+	for(i=0; i<strlen(comentario); i++){
+		if(comentario[i] == '\n')
+			num_linha++;	
+	}
+}
 
 [ \t]	;
 \n	{num_linha++;}
