@@ -7,7 +7,7 @@ variáveis
 	i: inteiro;
 	t: real;
 	q: inteiro;
-fim-variáveis
+//falta o fim-variaveis
 
 início
 	imprima("Quantidade de números:");

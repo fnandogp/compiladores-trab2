@@ -185,7 +185,7 @@ comando_retorne
 
 //nao pode ter escolha sem o caso
 comando_escolha
-: token_pr_escolha token_abre_parenteses paramentros_chamada_funcao token_fecha_parenteses casos token_pr_fim_escolha
+: token_pr_escolha token_abre_parenteses token_identificador token_fecha_parenteses casos token_pr_fim_escolha
 ;
 
 casos
@@ -219,8 +219,6 @@ passo
 | token_pr_passo token_soma token_inteiro
 | token_pr_passo token_subtracao token_inteiro
 ;
-/*
-*/
 
 expressao
 : expressao token_pr_ou termo_1

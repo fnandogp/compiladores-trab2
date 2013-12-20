@@ -15,7 +15,8 @@ início
 	b := leia();
 	imprima("Digite a operação (soma/sub/mult/div):");
 	op := leia();
-	escolha (x)
+	// errado funcao escolha recebe uma variavel e nao uma expressao
+	escolha (x - 1)
 		caso "soma" :
 			imprima("soma de ", a, " e ", b, " é igual a ", soma(a, b));
 			para;

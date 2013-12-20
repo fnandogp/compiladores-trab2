@@ -27,7 +27,8 @@ função faixa_etaria(idade: inteiro) : literal
 início
 	se idade >= 18 então
 		se idade < 60 então
-			retorne "adulto";
+			//errado, esta faltando o ponto e virgula
+			retorne "adulto"
 		senão
 			retorne "idoso";
 		fim-se
